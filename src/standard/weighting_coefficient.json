@@ -1,0 +1,11 @@
+{
+  "bmi": 0.15,
+  "vital_capacity": 0.15,
+  "race_1000m": 0.2,
+  "race_800m": 0.2,
+  "race_50m": 0.2,
+  "sit_up": 0.1,
+  "sit_and_reach": 0.1,
+  "pull_up": 0.1,
+  "standing_long_jump": 0.1
+}

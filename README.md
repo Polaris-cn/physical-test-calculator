@@ -1,0 +1,12 @@
+## 用语说明
+- event 测试项目
+- performance 测试成绩
+- score 测试得分
+- bonus 测试加分
+- final score 测试最后得分
+- grade 测试评级 (可选)
+- aggregate score 总分
+- freshman 大一
+- sophomore 大二
+- junior 大三
+- senior 大四

@@ -1,0 +1,29 @@
+{
+  "name": "physical-test-calculator",
+  "version": "1.0.0",
+  "description": "大学生体测成绩计算器",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "mocha --compilers js:babel-register || exit 0"
+  },
+  "keywords": [
+    "calculator"
+  ],
+  "author": "fjc0k",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "babelrc-rollup": "^3.0.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-json": "^2.1.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1"
+  }
+}
