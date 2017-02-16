@@ -3,12 +3,13 @@ import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babelrc from 'babelrc-rollup';
 import commonjs from 'rollup-plugin-commonjs';
-import uglify from 'rollup-plugin-uglify';
 
 const pkg = require('./package.json');
 
+const camelCase = require('camelcase');
+
 export default {
-  entry: 'index.js',
+  entry: 'src/calculator.js',
   plugins: [
     nodeResolve({
       jsnext: true,
@@ -16,11 +17,10 @@ export default {
     }),
     commonjs(),
     json(),
-    babel(babelrc()),
-    uglify()
+    babel(babelrc())
   ],
   format: 'umd',
-  moduleId: pkg.name,
-  moduleName: pkg.name,
-  dest: 'dist/' + pkg.name + '.min.js'
+  moduleId: camelCase(pkg.name),
+  moduleName: camelCase(pkg.name),
+  dest: 'dist/' + pkg.name + '.js'
 };
