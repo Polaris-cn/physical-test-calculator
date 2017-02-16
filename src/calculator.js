@@ -28,7 +28,7 @@ const calculator = (
   performances = util.mapValues(performances, performance => +performance);
 
   if (performances.standing_long_jump) { // 跳远: 米转厘米
-    performances.standing_long_jump = performances.standing_long_jump < 5 ? performances.standing_long_jump * 100 : performances.standing_long_jump;
+    performances.standing_long_jump *= performances.standing_long_jump < 5 ? 100 : 1;
   }
 
 
@@ -51,7 +51,8 @@ const calculator = (
     rawScore: {},
     score: {},
     bonus: {},
-    grade: {}
+    grade: {},
+    aggregate: {}
   };
 
   util.forOwn(performances, (performance, event) => {
@@ -75,9 +76,11 @@ const calculator = (
   });
 
   // 总分
-  result.score.aggregate = util.sum(util.values(result.score));
-  result.grade.aggregate = util.calculate(
-    result.score.aggregate,
+  result.aggregate.score = util.sum(
+    [...util.values(result.score), ...util.values(result.bonus)]
+  );
+  result.aggregate.grade = result.grade.aggregate = util.calculate(
+    result.aggregate.score,
     standard.grade[gender].aggregate
   );
 
