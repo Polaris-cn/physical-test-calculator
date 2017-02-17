@@ -25,7 +25,9 @@ let result = calculator(gender, grade, performances);
 <!-- // or production -->
 <script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.min.js"></script>
 
-var result = physicalTestCalculator(gender, grade, performances);
+<script>
+  var result = physicalTestCalculator(gender, grade, performances);
+</script>
 ```
 
 
