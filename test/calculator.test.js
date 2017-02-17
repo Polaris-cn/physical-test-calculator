@@ -1,7 +1,7 @@
 /**
  * Created by 方剑成 on 2017/2/16.
  */
-import calculator from '../src/calculator';
+import calculator from '../src';
 
 import standard from '../src/standard';
 
