@@ -1,5 +1,5 @@
 /*!
- * physical-test-calculator v1.0.6 
+ * physical-test-calculator v1.0.7 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
