@@ -72,10 +72,16 @@ const calculator = (
       );
     }
     if (!!bonus) {
-      result.bonus[event] = util.calculate(
-        isSmallBetter ? util.last(score[1]) - performance : performance - util.last(score[1]),
-        bonus
-      );
+      let last = util.last(score[1]);
+      if (performance === 0) { // 面对低优指标时 0 会造成加分
+        result.bonus[event] = 0;
+      } else {
+        if (isSmallBetter) {
+          result.bonus[event] = last > performance ? util.calculate(last - performance, bonus) : 0;
+        } else {
+          result.bonus[event] = last < performance ? util.calculate(performance - last, bonus) : 0;
+        }
+      }
     }
   });
 

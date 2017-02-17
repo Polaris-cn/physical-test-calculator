@@ -87,13 +87,27 @@ const aggregateTest = (() => {
 
 describe(
   '体测成绩测试-总分',
-  () => it(
-    'aggregate.score',
-    () => expect(
-      calculator(gender, grade, aggregateTest.performances)
-    ).to.have.deep.property(
+  () => {
+    it(
       'aggregate.score',
-      aggregateTest.aggregate_score
-    )
-  )
+      () => expect(
+        calculator(gender, grade, aggregateTest.performances)
+      ).to.have.deep.property(
+        'aggregate.score',
+        aggregateTest.aggregate_score
+      )
+    );
+    it(
+      'aggregate.score=0',
+      () => expect(
+        calculator(gender, grade, {
+          race_1000m: 0,
+          pull_up: 0
+        })
+      ).to.have.deep.property(
+        'aggregate.score',
+        0
+      )
+    );
+  }
 );

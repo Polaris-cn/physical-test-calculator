@@ -1,5 +1,5 @@
 /*!
- * physical-test-calculator v1.0.7 
+ * physical-test-calculator v1.0.8 
  * (c) 2017 fjc0k
  * Released under the MIT License.
  */
@@ -254,10 +254,16 @@ var calculator = function (
       );
     }
     if (!!bonus) {
-      result.bonus[event] = util.calculate(
-        isSmallBetter ? util.last(score[1]) - performance : performance - util.last(score[1]),
-        bonus
-      );
+      var last = util.last(score[1]);
+      if (performance === 0) { // 面对低优指标时 0 会造成加分
+        result.bonus[event] = 0;
+      } else {
+        if (isSmallBetter) {
+          result.bonus[event] = last > performance ? util.calculate(last - performance, bonus) : 0;
+        } else {
+          result.bonus[event] = last < performance ? util.calculate(performance - last, bonus) : 0;
+        }
+      }
     }
   });
 
