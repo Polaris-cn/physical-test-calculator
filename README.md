@@ -2,6 +2,10 @@
 
 中国大学生体测成绩计算器，依据[2014年《国家学生体质健康标准》单项指标评分表](http://www.csh.edu.cn/wtzx/zl/20141226/2c909e854a8490a4014a8498e6730009.html)、[2014年《国家学生体质健康标准》加分指标评分表](http://www.csh.edu.cn/wtzx/zl/20141226/2c909e854a8490a4014a8496ab670007.html)、[国家学生体质健康标准单项指标与权重](http://www.csh.edu.cn/wtzx/bz/20141226/2c909e854a84301a014a8440b4d2000f.html)编写。
 
+### :bulb: Example
+
+[https://fjc0k.github.io/example/physical-test-calculator.html](https://fjc0k.github.io/example/physical-test-calculator.html)
+
 ### 安装
 
 ```shell

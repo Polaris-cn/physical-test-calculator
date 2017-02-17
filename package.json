@@ -1,6 +1,6 @@
 {
   "name": "physical-test-calculator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "大学生体测成绩计算器",
   "main": "dist/physical-test-calculator.common.js",
   "jsnext:main": "src/index.js",
