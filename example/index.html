@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script src="../dist/physical-test-calculator.js"></script>
+  <title>大学生体测成绩计算器</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+  <style>
+    legend {
+      line-height: 20px;
+      height: 20px;
+    }
+    .result-type {
+      display: inline-block;
+    }
+    .result-type button {
+      font-size: 60%;
+    }
+    tr.title {
+      background-color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <form class="pure-form pure-form-aligned" @submit.prevent>
+          <fieldset>
+            <legend>体测数据</legend>
+            <div class="pure-control-group">
+              <label for="gender">性别</label>
+              <select id="gender" v-model="gender">
+                <option v-for="g in genders" :value="g[0]">{{ g[1] }}</option>
+              </select>
+            </div>
+            <div class="pure-control-group">
+              <label for="grade">年级</label>
+              <select id="grade" v-model="grade">
+                <option v-for="g in grades" :value="g[0]">{{ g[1] }}</option>
+              </select>
+            </div>
+            <div class="pure-control-group" v-for="f in curForm">
+              <label :for="f[0]">{{ f[1] }}</label>
+              <input :id="f[0]" v-model="f[3]">
+              <span class="pure-form-message-inline">{{ f[2] }}</span>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="pure-u-1-2">
+        <form class="pure-form pure-form-aligned">
+          <fieldset>
+            <legend>
+              体测结果
+              <div class="result-type pure-button-group" role="group">
+                <button class="pure-button" :class="{
+                  'pure-button-active': resultType === 'table'
+                }" @click.prevent="resultType='table'">Table</button>
+                <button class="pure-button" :class="{
+                  'pure-button-active': resultType === 'json'
+                }" @click.prevent="resultType='json'">Json</button>
+              </div>
+            </legend>
+            <table class="pure-table pure-table-bordered" v-if="resultType === 'table'">
+              <template v-for="p in Object.keys(result)">
+                <tr class="title"><th colspan="2">{{ p }}</th></tr>
+                <tr v-for="item in Object.keys(result[p])">
+                  <td>{{ item }}</td>
+                  <td>{{ result[p][item] }}</td>
+                </tr>
+              </template>
+            </table>
+            <pre v-else>{{ result }}</pre>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      data: {
+        genders: [
+          ['male', '男'],
+          ['female', '女']
+        ],
+        gender: 'female',
+        grades: [
+          ['freshman', '大一'],
+          ['sophomore', '大二'],
+          ['junior', '大三'],
+          ['senior', '大四']
+        ],
+        grade: 'junior',
+        form: [
+          ['weight', '体重', '千克', 60],
+          ['height', '身高', '厘米', 175],
+          ['vital_capacity', '肺活量', '毫升', 3000],
+          ['sit_and_reach', '坐立前屈', '厘米', 15],
+          ['standing_long_jump', '立定跳远', '米', 2.2],
+          ['race_50m', '50米跑', '秒', 8.2],
+          ['race_1000m', '1000米跑', '秒', 250],
+          ['pull_up', '引体向上', '个', 6],
+          ['race_800m', '800米跑', '秒', 250],
+          ['sit_up', '仰卧起坐', '个', 13]
+        ],
+        result: {},
+        resultType: 'table'
+      },
+      computed: {
+        curForm: function () {
+          var self = this;
+          var excludeFields = {
+            male: ['race_800m', 'sit_up'],
+            female: ['race_1000m', 'pull_up']
+          };
+          return self.form.filter(function (field) {
+            return excludeFields[self.gender].indexOf(field[0]) === -1;
+          });
+        }
+      },
+      methods: {
+        calculate: function () {
+          let performances = {};
+          this.curForm.forEach(function (field) {
+            performances[field[0]] = field[3];
+          });
+          this.result = physicalTestCalculator(
+            this.gender,
+            this.grade,
+            performances
+          );
+        }
+      },
+      mounted: function () {
+        this.gender = 'male';
+      },
+      watch: {
+        gender: { handler: 'calculate' },
+        grade: { handler: 'calculate' },
+        curForm: { handler: 'calculate' }
+      }
+    }).$mount('#app');
+  </script>
+</body>
+</html>

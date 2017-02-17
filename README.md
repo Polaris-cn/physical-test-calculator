@@ -42,6 +42,7 @@ race_800m | `秒` | 800米跑, 仅 `female`
 
 属性 | 类型 | 描述
 --------- | ---- | -----------
+performance | `Object` | 体测原始数据, 如: 取BMI指数用 `performance.bmi`
 rawScore | `Object` | 体测项目原始得分, 满分100, 如: 取BMI原始得分用 `rawScore.bmi`
 score | `Object` | 体测项目加权得分, 如: 取立定跳远加权得分用 `score.standing_long_jump`
 bonus | `Object` | 体测项目加分, 仅以下项目有加分: `bonus.pull_up`, `bonus.race_1000m`, `bonus.sit_up`, `bonus.race_800m`

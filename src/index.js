@@ -27,12 +27,12 @@ const calculator = (
 
   performances = util.mapValues(performances, performance => +performance);
 
-  if (performances.standing_long_jump) { // 跳远: 米转厘米
+  if (performances.standing_long_jump !== undefined) { // 跳远: 米转厘米
     performances.standing_long_jump *= performances.standing_long_jump < 5 ? 100 : 1;
   }
 
 
-  if (performances.weight !== undefined && performances.height !== undefined) {
+  if (!!performances.weight && !!performances.height) {
     // BMI指数
     performances.bmi = Number((
       parseFloat(performances.weight) /
@@ -48,6 +48,7 @@ const calculator = (
   grade = ['freshman', 'sophomore'].indexOf(grade) !== -1 ? 'freshman_sophomore' : 'junior_senior';
 
   let result = {
+    performance: performances,
     rawScore: {},
     score: {},
     bonus: {},
@@ -65,7 +66,10 @@ const calculator = (
       result.score[event] = result.rawScore[event] * (standard.weighting_coefficient[event] || 1);
     }
     if (!!grade$) {
-      result.grade[event] = util.calculate(result.score[event], grade$);
+      result.grade[event] = util.calculate(
+        event === 'bmi' ? performances.bmi : result.score[event],
+        grade$
+      );
     }
     if (!!bonus) {
       result.bonus[event] = util.calculate(
