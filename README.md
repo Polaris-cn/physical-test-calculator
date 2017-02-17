@@ -10,10 +10,24 @@ npm i physical-test-calculator --save
 
 ### 使用
 
+##### Node
+
 ```javascript
 import calculator from 'physical-test-calculator';
 let result = calculator(gender, grade, performances);
 ````
+
+##### HTML
+```html
+<!-- // development -->
+<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.js"></script>
+
+<!-- // or production -->
+<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.min.js"></script>
+
+var result = physicalTestCalculator(gender, grade, performances);
+```
+
 
 ##### 选项
 
