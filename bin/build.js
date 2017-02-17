@@ -76,5 +76,7 @@ Object.keys(bundles).forEach(bundle => {
       config[key] = bundleConfig[key];
     }
   });
-  rollup.rollup(config).then(bundle => bundle.write(config)).catch(err => console.log(err));
+  rollup.rollup(config)
+    .then(bundle => bundle.write(config))
+    .catch(err => console.log(err));
 });
