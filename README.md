@@ -7,11 +7,17 @@
 [https://fjc0k.github.io/example/physical-test-calculator.html](https://fjc0k.github.io/example/physical-test-calculator.html)
 
 ### 安装
-
+##### Node
 ```shell
 npm i physical-test-calculator --save
 ```
-
+##### Browser
+```html
+<!-- // development -->
+<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.js"></script>
+<!-- // or production -->
+<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.min.js"></script>
+```
 ### 使用
 
 ##### Node
@@ -21,14 +27,8 @@ import calculator from 'physical-test-calculator';
 let result = calculator(gender, grade, performances);
 ````
 
-##### HTML
+##### Browser
 ```html
-<!-- // development -->
-<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.js"></script>
-
-<!-- // or production -->
-<script src="https://unpkg.com/physical-test-calculator/dist/physical-test-calculator.min.js"></script>
-
 <script>
   var result = physicalTestCalculator(gender, grade, performances);
 </script>

@@ -2,7 +2,7 @@
  * Created by 方剑成 on 2017/2/17.
  */
 
-const rollup = require('rollup');
+const rollupMakeBundles = require('rollup-make-bundles');
 const flow = require('rollup-plugin-flow-no-whitespace');
 const json = require('rollup-plugin-json');
 const nodeResolve = require('rollup-plugin-node-resolve');
@@ -42,7 +42,11 @@ const baseConfig = {
 };
 
 const bundles = {
-  commonjs: {
+  ESModule: {
+    dest: root + `dist/${pkg.name}.es.js`,
+    format: 'es'
+  },
+  CommonJS: {
     dest: root + `dist/${pkg.name}.common.js`,
     format: 'cjs'
   },
@@ -65,18 +69,6 @@ const bundles = {
   }
 };
 
-Object.keys(bundles).forEach(bundle => {
-  let config = clone(baseConfig);
-  let bundleConfig = bundles[bundle];
-  Object.keys(bundleConfig).forEach(key => {
-    if (Array.isArray(bundleConfig[key])) {
-      if (!config[key]) config[key] = bundleConfig[key];
-      else config[key].push(...bundleConfig[key]);
-    } else {
-      config[key] = bundleConfig[key];
-    }
-  });
-  rollup.rollup(config)
-    .then(bundle => bundle.write(config))
-    .catch(err => console.log(err));
-});
+rollupMakeBundles(baseConfig, bundles)
+  .then(message => console.log(message))
+  .catch(err => console.log(err));
