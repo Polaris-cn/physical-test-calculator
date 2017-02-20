@@ -11,7 +11,6 @@ const buble = require('rollup-plugin-buble');
 const uglify = require('rollup-plugin-uglify');
 
 const camelCase = require('camelcase');
-const clone = require('js.clone');
 const pkg = require('../package.json');
 
 const root = require('path').join(__dirname, '..') + '/';
@@ -41,34 +40,9 @@ const baseConfig = {
   moduleName
 };
 
-const bundles = {
-  ESModule: {
-    dest: root + `dist/${pkg.name}.es.js`,
-    format: 'es'
-  },
-  CommonJS: {
-    dest: root + `dist/${pkg.name}.common.js`,
-    format: 'cjs'
-  },
-  production: {
-    dest: root + `dist/${pkg.name}.min.js`,
-    format: 'umd',
-    plugins: [
-      uglify({
-        output: {
-          comments (node, comment) {
-            return comment.type == "comment2" && /^!/i.test(comment.value);
-          }
-        }
-      })
-    ]
-  },
-  development: {
-    dest: root + `dist/${pkg.name}.js`,
-    format: 'umd'
-  }
-};
-
-rollupMakeBundles(baseConfig, bundles)
+rollupMakeBundles.easy(baseConfig, {
+  dest: root + 'dist',
+  name: pkg.name
+})
   .then(message => console.log(message))
   .catch(err => console.log(err));
