@@ -3,12 +3,6 @@
  */
 
 const rollupMakeBundles = require('rollup-make-bundles');
-const flow = require('rollup-plugin-flow-no-whitespace');
-const json = require('rollup-plugin-json');
-const nodeResolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const buble = require('rollup-plugin-buble');
-const uglify = require('rollup-plugin-uglify');
 
 const camelCase = require('camelcase');
 const pkg = require('../package.json');
@@ -26,16 +20,7 @@ const moduleName = camelCase(pkg.name);
 
 const baseConfig = {
   entry: root + 'src/index.js',
-  plugins: [
-    flow(),
-    nodeResolve({
-      jsnext: true,
-      main: true
-    }),
-    commonjs(),
-    json(),
-    buble()
-  ],
+  presetPlugins: true,
   banner,
   moduleName
 };
@@ -43,6 +28,4 @@ const baseConfig = {
 rollupMakeBundles.easy(baseConfig, {
   dest: root + 'dist',
   name: pkg.name
-})
-  .then(message => console.log(message))
-  .catch(err => console.log(err));
+});
