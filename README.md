@@ -6,6 +6,13 @@
 
 [https://fjc0k.github.io/example/physical-test-calculator.html](https://fjc0k.github.io/example/physical-test-calculator.html)
 
+### 相关应用
+- [体测成绩计算器 - 腾讯微校](http://weixiao.qq.com/home/app/details/10100)
+- 大学生体测成绩计算器小程序:
+
+![小程序](http://ww1.sinaimg.cn/large/d9ddb3f8ly1fgdudnq9s8j2076076dgq.jpg)
+
+
 ### 安装
 ##### Node
 ```shell
